@@ -1,6 +1,5 @@
 // Heartfelt message for timeline
 const heartfeltMessage = "You know, meeting you was like finding a reason to smile every single day. You make everything feel special, and I'm so grateful for that. Thank you for being you.";
-//re_Nn9BdT9E_6tk4YRynVEQe8r1SfzNekzVP
 // Animation Timeline
 const animationTimeline = () => {
   // Spit chars that needs to be animated individually

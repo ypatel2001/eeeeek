@@ -31,9 +31,9 @@ module.exports = async function handler(req, res) {
       text: `${new Date().toISOString()}\n\n${text}`,
     });
 
-    return res.json({ ok: true });
+    return res.json({ ok: true, success: true });
   } catch (err) {
     console.error('Resend send error:', err);
-    return res.status(500).json({ ok: false, error: err.message || 'send failed' });
+    return res.status(500).json({ ok: false, success: false, error: err.message || 'send failed' });
   }
 };
