@@ -17,19 +17,37 @@ app.post('/api/save', async (req, res) => {
     return res.status(400).json({ success: false, error: 'Empty text' });
   }
   try {
-    const { Resend } = require('resend');
-    const resend = new Resend(process.env.RESEND_API_KEY);
-    await resend.emails.send({
-      from: `Valentine <no-reply@${req.hostname || 'example.com'}>` ,
-      to: [process.env.RECIPIENT_EMAIL || 'yashppatel01@gmail.com'],
-      subject: 'New Valentine Response',
-      text: `${new Date().toISOString()}\n\n${text}`,
+    const axios = require('axios');
+
+    const MAILGUN_API_KEY = process.env.MAILGUN_API_KEY;
+    const MAILGUN_DOMAIN = process.env.MAILGUN_DOMAIN;
+    const FROM_EMAIL = process.env.FROM_EMAIL || `Mailgun Sandbox <postmaster@${MAILGUN_DOMAIN}>`;
+    const RECIPIENT_EMAIL = process.env.RECIPIENT_EMAIL || 'yp9735192324@gmail.com';
+
+    if (!MAILGUN_API_KEY || !MAILGUN_DOMAIN) {
+      console.error('Mailgun config missing');
+      return res.status(500).json({ success: false, error: 'Mailgun not configured' });
+    }
+
+    const params = new URLSearchParams();
+    params.append('from', FROM_EMAIL);
+    params.append('to', RECIPIENT_EMAIL);
+    params.append('subject', 'New Valentine Response');
+    params.append('text', `${new Date().toISOString()}\n\n${text}`);
+
+    const url = `https://api.mailgun.net/v3/${MAILGUN_DOMAIN}/messages`;
+    const response = await axios.post(url, params.toString(), {
+      auth: { username: 'api', password: MAILGUN_API_KEY },
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      timeout: 10000,
     });
 
-    return res.json({ success: true });
+    console.log('Mailgun response:', response.data);
+    return res.json({ success: true, data: response.data });
   } catch (err) {
-    console.error('Error sending email via Resend:', err);
-    return res.status(500).json({ success: false, error: err.message || 'send failed' });
+    console.error('Error sending email via Mailgun:', err);
+    if (err.response && err.response.data) console.error('Mailgun error body:', err.response.data);
+    return res.status(500).json({ success: false, error: err.message || 'send failed', details: err.response && err.response.data });
   }
 });
 
