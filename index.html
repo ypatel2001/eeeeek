@@ -193,19 +193,34 @@
         <button id="tryAgainBtn" class="valentine-btn valentine-yes" style="display:none; margin-top: 20px; margin-left: auto; margin-right: auto;"></button>
       </div>
     <script>
-   
-      function playAudioAfterDelay(delay) {
-          setTimeout(function() {
-              var audio = document.getElementById("audio");
-              audio.muted = false;
-              audio.play().catch(function(error) {
-                  console.error("Error playing audio:", error);
-              });
-          }, delay);
-      }
+      // Attempt to play audio unmuted on load; if blocked by browser
+      // autoplay policy, fall back to playing on first user interaction.
+      document.addEventListener('DOMContentLoaded', function() {
+        const audio = document.getElementById('audio');
+        if (!audio) return;
 
-      playAudioAfterDelay(32000); 
-  </script>
+        const userPlay = () => {
+          audio.muted = false;
+          audio.play().catch((e) => console.error('User-initiated play failed', e));
+        };
+
+        const tryPlayUnmuted = () => {
+          audio.muted = false;
+          const p = audio.play();
+          if (p !== undefined) {
+            p.then(() => {
+              console.log('Audio is playing');
+            }).catch((err) => {
+              console.warn('Autoplay prevented, waiting for user interaction', err);
+              document.addEventListener('click', userPlay, { once: true });
+              document.addEventListener('touchstart', userPlay, { once: true });
+            });
+          }
+        };
+
+        tryPlayUnmuted();
+      });
+    </script>
     
   </body>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>

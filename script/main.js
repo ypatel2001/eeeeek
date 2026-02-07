@@ -1,5 +1,11 @@
 // Heartfelt message for timeline
-const heartfeltMessage = "You know, meeting you was like finding a reason to smile every single day. You make everything feel special, and I'm so grateful for that. Thank you for being you.";
+const heartfeltMessage = `Shri ❤️
+
+Happy Valentine’s Day. I’ve been thinking about how lucky I feel to have you in my life. From our first conversations to our dates and all our FaceTime calls, you’ve slowly become someone really special to me.
+
+I love how you’re my super PT — smart, driven, and so hardworking. I genuinely admire the way you handle everything you do. On top of that, you’re so beautiful, sweet, and caring. Being with you just makes me feel happy, calm, and fulfilled in a way that’s hard to explain.
+
+I love what we’re building and I can really see something meaningful with you as my special eeeeeeek partner. So I wanted to ask you properly, would you be my girlfriend and my Valentine? 💕`;
 // Animation Timeline
 const animationTimeline = () => {
   // Spit chars that needs to be animated individually
