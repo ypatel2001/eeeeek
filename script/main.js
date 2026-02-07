@@ -12,13 +12,15 @@ const animationTimeline = () => {
   const textBoxChars = document.getElementsByClassName("hbd-chatbox")[0];
   const hbd = document.getElementsByClassName("wish-hbd")[0];
 
-  textBoxChars.innerHTML = `<span>${textBoxChars.innerHTML
-    .split("")
-    .join("</span><span>")}</span`;
+  // Split text into character spans; preserve spaces as non-breaking spaces
+  const splitToSpans = (text) =>
+    text
+      .split("")
+      .map((ch) => (ch === " " ? "<span class=\"space\">&nbsp;</span>" : `<span>${ch}</span>`))
+      .join("");
 
-  hbd.innerHTML = `<span>${hbd.innerHTML
-    .split("")
-    .join("</span><span>")}</span`;
+  textBoxChars.innerHTML = splitToSpans(textBoxChars.textContent || textBoxChars.innerHTML);
+  hbd.innerHTML = splitToSpans(hbd.textContent || hbd.innerHTML);
 
   const ideaTextTrans = {
     opacity: 0,
@@ -391,7 +393,7 @@ const showValentinePrompt = () => {
     responseDiv.style.display = 'block';
     tryAgainBtn.style.display = 'block';
     tryAgainBtn.textContent = 'Try Again!';
-    responseDiv.innerHTML = "That's okay, I'll win you over! 😉";
+    responseDiv.innerHTML = "😑 Rudeeeeeee why would you even click that? <br> That's okay, I'll win you over very soon! 😉";
     responseDiv.style.color = '#888';
   };
   
