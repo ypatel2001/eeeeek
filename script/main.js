@@ -180,7 +180,7 @@ const animationTimeline = () => {
     )
     .staggerFromTo(
       ".baloons img",
-      2.5,
+      6.5,
       {
         opacity: 0.9,
         y: 1400,
@@ -188,8 +188,9 @@ const animationTimeline = () => {
       {
         opacity: 1,
         y: -1000,
+        ease: Power2.easeOut,
       },
-      0.2
+      0.3
     )
     .from(
       ".girl-dp",
@@ -423,14 +424,37 @@ const fetchData = () => {
     });
 };
 
+const preloadImages = (selector = "img") => {
+  const nodes = Array.from(document.querySelectorAll(selector));
+  const sources = nodes
+    .map((node) => node.getAttribute("src"))
+    .filter(Boolean);
+  const uniqueSources = Array.from(new Set(sources));
+
+  return Promise.all(
+    uniqueSources.map(
+      (src) =>
+        new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => resolve({ src, status: "loaded" });
+          img.onerror = () => resolve({ src, status: "error" });
+          img.src = src;
+        })
+    )
+  ).then(() => undefined);
+};
+
 // Run fetch and animation in sequence
 const resolveFetch = () => {
   return new Promise((resolve, reject) => {
     fetchData();
-    resolve("Fetch done!");
+    preloadImages().then(() => {
+      resolve("Fetch done!");
+    }).catch(() => {
+      resolve("Fetch done!");
+    });
   });
 };
 
 // Only initialize animation when called from login page
 // resolveFetch().then(animationTimeline());
-
