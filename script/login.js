@@ -10,7 +10,7 @@ class LoginPage {
     this.cursorBlink = document.querySelector('.cursor-blink');
     this.correctPassword = 'nov20';
     this.welcomeText = 'hi shriii ! guess the secret password to see your surprise :)';
-    this.hintMessage = "*sigh* You shouldn't need this but here you go: \n Hint: Think of a special date...";
+    this.hintMessage = "*sigh* You shouldn't need this but here you go: <br> Hint: Think of a special date (all lowercase,no year or spaces and 5 chars)...";
     this.isTyping = false;
     this.init();
   }

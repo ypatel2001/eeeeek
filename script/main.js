@@ -1,11 +1,11 @@
 // Heartfelt message for timeline
-const heartfeltMessage = `Shri ❤️
+const heartfeltMessage = `My Dearest Shri ❤️
 
-Happy Valentine’s Day. I’ve been thinking about how lucky I feel to have you in my life. From our first conversations to our dates and all our FaceTime calls, you’ve slowly become someone really special to me.
+Happy Valentine’s Day! I’ve been thinking about how lucky I feel to have you in my life. From our first conversations to our dates and all our FaceTime dates (calls hehe), you’ve become someone really special to me.
 
-I love how you’re my super PT — smart, driven, and so hardworking. I genuinely admire the way you handle everything you do. On top of that, you’re so beautiful, sweet, and caring. Being with you just makes me feel happy, calm, and fulfilled in a way that’s hard to explain.
+I love how you’re my super PT, someone special to experience life with. I admire how smart, driven, and so hardworking you are. You have taught me that having balance in life is important and you can truly achieve anything and everything (with a lil planning ofc hehe!). You’re so sweet and caring towards me that is only matched with how beautiful you are. Being with you makes me feel so so so happy and fulfilled in a way that’s hard to explain to you but I try everyday in my actions/words/positive vibes.
 
-I love what we’re building and I can really see something meaningful with you as my special eeeeeeek partner. So I wanted to ask you properly, would you be my girlfriend and my Valentine? 💕`;
+We are always communicating and I love that about you, and we always have that can-do, "we'll figure it out" attitude which I think is so incredibly hard to find. I love what we’re building together and I can really see something meaningful with you as my special eeeeeeek partner. So I wanted to ask you properly, would you be my girlfriend, my eeeeek partner, my Valentine and continue experiencing life with me? 💕`;
 // Animation Timeline
 const animationTimeline = () => {
   // Spit chars that needs to be animated individually
